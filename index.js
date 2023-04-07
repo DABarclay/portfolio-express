@@ -37,7 +37,7 @@ function checkDatabase(){
     console.log(rows[0]);
     });
 };
-
+ 
 function updateDatabase(){
     console.log("CHECK")
     let getDate = new Date()
