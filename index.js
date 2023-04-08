@@ -7,7 +7,7 @@ require('dotenv').config()
 
 app.use(cors())
 
-const port = 8080;
+const PORT = `0.0.0.0:$PORT`;
 
 var con = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -66,4 +66,4 @@ function updateDatabase(){
     )
 }
  
-app.listen(port, () => console.log(`Server running on port: ${port}`))
+app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
