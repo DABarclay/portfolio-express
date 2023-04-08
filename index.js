@@ -7,7 +7,7 @@ require('dotenv').config()
 
 app.use(cors())
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 var con = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -16,12 +16,14 @@ var con = mysql.createConnection({
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT
 });
+
 con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
 });
-app.get('/', (req, res) => {
-    res.json({ message: "ok" });
+
+app.get('/test', (req, res) => {
+    res.send('TEST success!')
 })
 
 app.post('/', (req, res) => {
