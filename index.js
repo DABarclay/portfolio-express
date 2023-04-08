@@ -22,7 +22,7 @@ con.connect(function(err) {
     console.log("Connected!");
 });
 
-app.get('/test', (req, res) => {
+app.get('/', (req, res) => {
     res.send('TEST success!')
 })
 
@@ -70,5 +70,7 @@ function updateDatabase(){
         }
     )
 }
- 
-app.listen(`0.0.0.0:${PORT}`, () => console.log(`Server running on port: ${PORT}`))
+
+console.log(PORT);
+
+app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
