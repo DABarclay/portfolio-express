@@ -23,26 +23,17 @@ con.connect(function(err) {
     console.log("Connected!");
 });
 
-app.get('/', cors(corsOptions), (req, res) => {
+app.get('/', (req, res) => {
     res.send('TEST success!')
 })
 
-app.post('/', cors(corsOptions), (req, res) => {
+app.post('/', (req, res) => {
     res.set('Content-Type', 'text/plain')
     res.send(`You sent: something to Express`)
     console.log("Post Recieved")
     updateDatabase();
     //checkDatabase();  
 })
-
-function checkDatabase(){
-    con.query('SELECT * FROM analytics', function(err, rows) 
-    {
-    if (err) throw err;
-
-    console.log(rows[0]);
-    });
-};
  
 function updateDatabase(){
     console.log("CHECK")
