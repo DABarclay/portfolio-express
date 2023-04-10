@@ -10,7 +10,7 @@ var corsOptions = {
     origin: "https://dabarclay.co.uk/"
 };
 
-app.use(cors(corsOptions))
+app.use(cors())
 
 const PORT = process.env.PORT || 8080;
 
