@@ -7,10 +7,11 @@ require('dotenv').config()
 
 
 var corsOptions = {
-    origin: "https://dabarclay.co.uk/"
+    origin: "http://192.168.0.103:8081/main/",
+    optionsSuccessStatus: 200
 };
 
-app.use(cors())
+
 
 const PORT = process.env.PORT || 8080;
 
@@ -27,11 +28,11 @@ con.connect(function(err) {
     console.log("Connected!");
 });
 
-app.get('/', (req, res) => {
+app.get('/', cors(corsOptions), (req, res) => {
     res.send('TEST success!')
 })
 
-app.post('/', (req, res) => {
+app.post('/', cors(corsOptions), (req, res) => {
     res.set('Content-Type', 'text/plain')
     res.send(`You sent: something to Express`)
     console.log("Post Recieved")
@@ -75,6 +76,16 @@ function updateDatabase(){
         }
     )
 }
+
+function keepAlive(){
+    var sql_keep = `SELECT 1 + 1 AS solution`; 
+    con.query(sql_keep, function (err, result) {
+        if (err) throw err;
+        console.log("Ping DB");
+  });
+}
+
+setInterval(keepAlive, 60000); 
 
 console.log(PORT);
 
