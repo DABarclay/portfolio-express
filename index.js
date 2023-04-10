@@ -6,12 +6,7 @@ var app = express()
 require('dotenv').config()
 
 
-var corsOptions = {
-    origin: "http://192.168.0.103:8081/main/",
-    optionsSuccessStatus: 200
-};
-
-
+app.use(cors());
 
 const PORT = process.env.PORT || 8080;
 
