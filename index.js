@@ -17,11 +17,6 @@ var con = mysql.createConnection({
     port: process.env.DB_PORT
 });
 
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-});
-
 app.get('/', (req, res) => {
     res.send('TEST success!')
 })
@@ -30,26 +25,21 @@ app.post('/', (req, res) => {
     res.set('Content-Type', 'text/plain')
     res.send(`You sent: something to Express`)
     console.log("Post Recieved")
-    updateDatabase();
-    //checkDatabase();  
+
+    updateDatabase()
 })
-
-function checkDatabase(){
-    con.query('SELECT * FROM analytics', function(err, rows) 
-    {
-    if (err) throw err;
-
-    console.log(rows[0]);
-    });
-};
  
 function updateDatabase(){
-    console.log("CHECK")
+    con.connect(function(err) {
+        if (err) throw err;
+        console.log("Connected!");
+    });  
+
     let getDate = new Date()
     let nowDate = getDate.toISOString().substring(0, 10);
     console.log(nowDate);
 
-    con.query(
+    con.promise().query(
        'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
             // There was an issue with the query 
             if(error){ 
@@ -57,15 +47,15 @@ function updateDatabase(){
                 return; 
             } 
             if(results.length){ 
-                console.log("Date exists");
                 con.query(
                     'UPDATE analytics SET visits = visits + 1 WHERE date = "'+nowDate+'"',
                 )
+                console.log("Date exists, update the visit counter");
             }else{ 
-                console.log("Date doesnt exist");
                 con.query(
                     'INSERT INTO `analytics` (`date`, `Visits`) VALUES ("'+nowDate+'", "'+1+'")',
                 );
+                console.log("Date doesnt exist, insert new date");
             }
         }
     )
