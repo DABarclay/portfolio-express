@@ -49,7 +49,7 @@ function updateDatabase(){
             }else{ 
                 console.log("Date doesnt exist");
                 con.query(
-                    'INSERT INTO `analytics` (`date`, `Visits`) VALUES ("'+nowDate+'", "'+1+'")',
+                    'INSERT INTO `analytics` (`date`, `visits`) VALUES ("'+nowDate+'", "'+1+'")',
                 );
             }
         }
