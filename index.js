@@ -1,22 +1,15 @@
 const express = require('express')
 const dotenv = require('dotenv')
-var cors = require('cors')
-var mysql = require('mysql2');
 var app = express()
+var cors = require('cors')
 require('dotenv').config()
-
+require('./routes')(app);
+var con = require('./db');
 
 app.use(cors());
 
 const PORT = process.env.PORT || 8080;
 
-var con = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    port: process.env.DB_PORT
-});
 
 con.connect(function(err) {
     if (err) throw err;
@@ -32,8 +25,8 @@ app.post('/', (req, res) => {
     res.send(`You sent: something to Express`)
     console.log("Post Recieved")
     updateDatabase();
-    //checkDatabase();  
 })
+
  
 function updateDatabase(){
     console.log("CHECK")
@@ -67,7 +60,6 @@ function keepAlive(){
     var sql_keep = `SELECT 1 + 1 AS solution`; 
     con.query(sql_keep, function (err, result) {
         if (err) throw err;
-        console.log("Ping DB");
   });
 }
 
