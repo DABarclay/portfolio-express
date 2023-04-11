@@ -6,12 +6,34 @@ function getDate(){
     return nowDate
 }
 
+function isDateSet(nowDate){
+    con.query(
+        'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
+             // There was an issue with the query 
+            if(error){ 
+                 callback(error); 
+                 return; 
+             } 
+            if(results.length){ 
+                 console.log("Date exists");
+                 con.query(
+                     'UPDATE analytics SET visits = visits + 1 WHERE date = "'+nowDate+'"',
+            )}else{ 
+                console.log("Date doesnt exist");
+                con.query(
+                    'INSERT INTO `analytics` (`date`) VALUES ("'+nowDate+'")',
+                );
+            }
+        })
+}
+
 module.exports = function(app){
 
     app.post('/gitmed', (req, res) => {
         res.set('Content-Type', 'text/plain')
         console.log("Medusa Protocol git rep has been viewed");
         nowDate = getDate();
+        isDateSet(nowDate);
         con.query(
             'UPDATE analytics SET gitmed = gitmed + 1 WHERE date = "'+nowDate+'"',
         );
@@ -22,6 +44,7 @@ module.exports = function(app){
         res.set('Content-Type', 'text/plain')
         console.log("Medusa website has been viewed");
         nowDate = getDate();
+        isDateSet(nowDate);
         con.query(
             'UPDATE analytics SET medmain = medmain + 1 WHERE date = "'+nowDate+'"',
         );
@@ -31,6 +54,7 @@ module.exports = function(app){
         res.set('Content-Type', 'text/plain')
         console.log("Landing page git repo has been viewed");
         nowDate = getDate();
+        isDateSet(nowDate);
         con.query(
             'UPDATE analytics SET gitspa = gitspa + 1 WHERE date = "'+nowDate+'"',
         );
@@ -41,6 +65,7 @@ module.exports = function(app){
         //res.send(`You sent: something to Express`)
         console.log("Landing page website has been viewed");
         nowDate = getDate();
+        isDateSet(nowDate);
         con.query(
             'UPDATE analytics SET spamain = spamain + 1 WHERE date = "'+nowDate+'"',
         );

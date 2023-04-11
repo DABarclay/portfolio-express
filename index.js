@@ -60,6 +60,7 @@ function keepAlive(){
     var sql_keep = `SELECT 1 + 1 AS solution`; 
     con.query(sql_keep, function (err, result) {
         if (err) throw err;
+        console.log("Ping DB");
   });
 }
 
