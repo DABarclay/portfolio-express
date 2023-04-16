@@ -84,6 +84,7 @@ module.exports = function(app){
 
     
     })
+
     app.post('/spamain', (req, res) => {
         res.set('Content-Type', 'text/plain')
         //res.send(`You sent: something to Express`)
@@ -110,4 +111,55 @@ module.exports = function(app){
             })
     })
 
+    app.post('/portfoliovue ', (req, res) => {
+        res.set('Content-Type', 'text/plain')
+        //res.send(`You sent: something to Express`)
+        console.log("Landing page website has been viewed");
+        nowDate = getDate();
+        con.query(
+            'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
+                 // There was an issue with the query 
+                if(error){ 
+                     callback(error); 
+                     return; 
+                 } 
+                if(results.length){ 
+                     console.log("A link has been clicked and the date exists");
+                     con.query(
+                        'UPDATE analytics SET portfoliovue = portfoliovue + 1 WHERE date = "'+nowDate+'"',
+                    );
+                    }else{ 
+                    console.log("A link has been clicked and the Date doesnt exist");
+                    con.query(
+                        'INSERT INTO `analytics` (`date`, `portfoliovue`) VALUES ("'+nowDate+'", "'+1+'")',
+                    );
+                }
+            })
+    })
+
+    app.post('/portfolioexpress', (req, res) => {
+        res.set('Content-Type', 'text/plain')
+        //res.send(`You sent: something to Express`)
+        console.log("Landing page website has been viewed");
+        nowDate = getDate();
+        con.query(
+            'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
+                 // There was an issue with the query 
+                if(error){ 
+                     callback(error); 
+                     return; 
+                 } 
+                if(results.length){ 
+                     console.log("A link has been clicked and the date exists");
+                     con.query(
+                        'UPDATE analytics SET portfolioexpress = portfolioexpress + 1 WHERE date = "'+nowDate+'"',
+                    );
+                    }else{ 
+                    console.log("A link has been clicked and the Date doesnt exist");
+                    con.query(
+                        'INSERT INTO `analytics` (`date`, `portfolioexpress`) VALUES ("'+nowDate+'", "'+1+'")',
+                    );
+                }
+            })
+    })
 }
