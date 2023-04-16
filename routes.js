@@ -114,7 +114,7 @@ module.exports = function(app){
     app.post('/portfoliovue', (req, res) => {
         res.set('Content-Type', 'text/plain')
         //res.send(`You sent: something to Express`)
-        console.log("Landing page website has been viewed");
+        console.log("Portfolio front end github has been viewed");
         nowDate = getDate();
         con.query(
             'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
@@ -140,7 +140,7 @@ module.exports = function(app){
     app.post('/portfolioexpress', (req, res) => {
         res.set('Content-Type', 'text/plain')
         //res.send(`You sent: something to Express`)
-        console.log("Landing page website has been viewed");
+        console.log("Portfolio back end github has been viewed");
         nowDate = getDate();
         con.query(
             'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
