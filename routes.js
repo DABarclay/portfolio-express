@@ -111,7 +111,7 @@ module.exports = function(app){
             })
     })
 
-    app.post('/portfoliovue ', (req, res) => {
+    app.post('/portfoliovue', (req, res) => {
         res.set('Content-Type', 'text/plain')
         //res.send(`You sent: something to Express`)
         console.log("Landing page website has been viewed");
