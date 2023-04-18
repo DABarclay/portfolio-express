@@ -12,7 +12,7 @@ module.exports = function(app){
         res.set('Content-Type', 'text/plain')
         res.send(`You sent: something to Express`)
         console.log("Post Recieved")
-        let nowDate = getDate();
+        nowDate = getDate();
         con.query(
             'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
                 // There was an issue with the query 
@@ -38,7 +38,7 @@ module.exports = function(app){
     app.post('/gitmed', (req, res) => {
         res.set('Content-Type', 'text/plain')
         console.log("Medusa Protocol git rep has been viewed");
-        let nowDate = getDate();
+        nowDate = getDate();
         con.query(
             'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
                  // There was an issue with the query 
@@ -63,7 +63,7 @@ module.exports = function(app){
     app.post('/medmain', (req, res) => {
         res.set('Content-Type', 'text/plain')
         console.log("Medusa website has been viewed");
-        let nowDate = getDate();
+        nowDate = getDate();
         con.query(
             'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
                  // There was an issue with the query 
@@ -88,7 +88,7 @@ module.exports = function(app){
     app.post('/gitspa', (req, res) => {
         res.set('Content-Type', 'text/plain')
         console.log("Landing page git repo has been viewed");
-        let nowDate = getDate();
+        nowDate = getDate();
         con.query(
             'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
                  // There was an issue with the query 
@@ -116,7 +116,7 @@ module.exports = function(app){
         res.set('Content-Type', 'text/plain')
         //res.send(`You sent: something to Express`)
         console.log("Landing page website has been viewed");
-        let nowDate = getDate();
+        nowDate = getDate();
         con.query(
             'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
                  // There was an issue with the query 
@@ -142,7 +142,7 @@ module.exports = function(app){
         res.set('Content-Type', 'text/plain')
         //res.send(`You sent: something to Express`)
         console.log("Portfolio front end github has been viewed");
-        let nowDate = getDate();
+        nowDate = getDate();
         con.query(
             'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
                  // There was an issue with the query 
@@ -168,7 +168,7 @@ module.exports = function(app){
         res.set('Content-Type', 'text/plain')
         //res.send(`You sent: something to Express`)
         console.log("Portfolio back end github has been viewed");
-        let nowDate = getDate();
+        nowDate = getDate();
         con.query(
             'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
                  // There was an issue with the query 
