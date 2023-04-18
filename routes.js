@@ -2,11 +2,38 @@ var con = require('./db');
 
 function getDate(){
     let getDate = new Date();
+    console.log(nowDate);
     let nowDate = getDate.toISOString().substring(0, 10);
     return nowDate
 }
 
 module.exports = function(app){
+    app.post('/', (req, res) => {
+        res.set('Content-Type', 'text/plain')
+        res.send(`You sent: something to Express`)
+        console.log("Post Recieved")
+        nowDate = getDate();
+        con.query(
+            'SELECT * FROM analytics WHERE date = ? LIMIT 1;', [nowDate], function(error, results){ 
+                // There was an issue with the query 
+                if(error){ 
+                    callback(error); 
+                    return; 
+                } 
+                if(results.length){ 
+                    console.log("Date exists");
+                    con.query(
+                        'UPDATE analytics SET visits = visits + 1 WHERE date = "'+nowDate+'"',
+                    )
+                }else{ 
+                    console.log("Date doesnt exist");
+                    con.query(
+                        'INSERT INTO `analytics` (`date`, `visits`) VALUES ("'+nowDate+'", "'+1+'")',
+                    );
+                }
+            }
+        )
+    })
 
     app.post('/gitmed', (req, res) => {
         res.set('Content-Type', 'text/plain')
