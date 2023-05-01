@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
 })
 
 function keepAlive(){
+    console.log("Ping database");
     var sql_keep = `SELECT 1 + 1 AS solution`; 
     con.query(sql_keep, function (err, result) {
         if (err) throw err;
