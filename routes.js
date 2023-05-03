@@ -9,8 +9,8 @@ function getDate(){
 
 module.exports = function(app){
     app.post('/', (req, res) => {
-        res.set('Content-Type', 'text/plain')
-        res.send(`You sent: something to Express`)
+        //res.set('Content-Type', 'text/plain')
+        //res.send(`You sent: something to Express`)
         console.log("Post Recieved")
         nowDate = getDate();
         con.query(
